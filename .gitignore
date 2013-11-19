@@ -20,3 +20,4 @@ doc/
 
 #Veewee artifacts
 veewee/iso/
+Gemfile.lock
