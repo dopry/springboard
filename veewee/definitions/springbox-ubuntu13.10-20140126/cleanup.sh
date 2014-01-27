@@ -1,4 +1,7 @@
+apt-get purge linux-headers-$(uname -r) build-essential
 apt-get -y autoremove
+
+find /var/cache -type f -exec rm "{}"\;
 
 dd if=/dev/zero of=/EMPTY bs=1M
 rm -f /EMPTY
