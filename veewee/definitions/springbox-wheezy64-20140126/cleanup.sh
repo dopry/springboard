@@ -1,6 +1,5 @@
 # Clean up
 apt-get -y remove \
-	linux-headers-$(uname -r) \
 	build-essential \
 	apt-listchanges \
 	at \
