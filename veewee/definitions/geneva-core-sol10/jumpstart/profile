@@ -1,0 +1,84 @@
+#
+# Install a base geneva system.
+#
+#	"@(#)x86-class 1.2 94/01/25"
+#
+install_type	initial_install
+system_type	  standalone
+partitioning	explicit
+filesys       c2t0d0s0 4000 /
+
+## Swap should be the maximum of 16GB or .33 * RAM.
+## for vagrant we keep it small.
+filesys       c2t0d0s1 1024 swap
+filesys       c2t0d0s7 free /export/home
+cluster		    SUNWCreq
+
+# Additional packages to allow vagrant installation (SSH) or convenient (bash, man)
+package      SUNWsshcu add
+package      SUNWsshdr add
+package      SUNWsshdu add
+package      SUNWsshr add
+package      SUNWsshu add
+package      SUNWbash add
+package      SUNWman add
+package      SUNWdoc add
+
+# For GCC (partially from https://wiki.chipp.ch/twiki/bin/view/CmsTier3/InstallationSolaris)
+package      SUNWarc add
+package      SUNWsfwhea add
+package      SUNWhea add
+package      SUNWtoo add
+package      SUNWlibm add
+package      SUNWgccruntime add
+
+# BSD compatibility
+package      SUNWscpu add
+
+# Centinel (adds /usr/xpg4/bin/id)
+package      SUNWxcu4 add
+
+# "Iconv modules for UTF-8 Locale" (required for Guest additions)
+package      SUNWuiu8 add
+
+# Geneva Prerequisites
+# tcsh is the officially supported shell for geneva.
+package   SUNWtcsh add
+# you need the ipc tools for managing shared memory segments.
+package   SUNWipc add
+
+# geneva is extremely time sensitive.
+package   SUNWntp4r add
+package   SUNWntp4u add
+
+# not sure that openssl is required.
+package   SUNWopenssl-commands add
+package   SUNWopenssl-include add
+package   SUNWopenssl-libraries add
+package   SUNWopensslr add
+
+# geneva (x packages for monitor and browse)
+package   SUNWxwrtl add
+package   SUNWxwplt add
+package   SUNWxwice add
+
+# not sure why these are here, but they were in the old vm install docs so I kept them.
+package   SUNWatfsr add
+package   SUNWatfsu add
+package   SUNWbip add
+package   SUNWbipr add
+package   SUNWdoc add
+package   SUNWbinutils add
+package   SUNWgm4  add
+package   SUNWgcmn add
+package   SUNWtex add
+package   SUNWarcr add
+package   SUNWesu add
+package   SUNWpool add
+package   SUNWpoolr add
+
+# we just like gnu tools
+package   SUNWgzip add
+package   SUNWgtar add
+package   SUNWgmake add
+package   SUNWggrp add
