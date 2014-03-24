@@ -1,28 +1,6 @@
 {
-  "provisioners": [
-    {
-      "type": "shell",
-      "scripts": [
-        "scripts/ubuntu64-saucy-build_time.sh",
-        "scripts/ubuntu64-saucy-apt.sh",
-        "scripts/ubuntu64-saucy-sudo.sh",
-        "scripts/ubuntu64-saucy-vagrant.sh",
-        "scripts/ubuntu64-saucy-vbox.sh",
-        "scripts/ubuntu64-saucy-cleanup.sh"
-      ],
-      "override": {
-        "virtualbox": {
-          "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
-        },
-        "vmware": {
-          "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
-        }
-      }
-    }
-  ],
   "builders": [
     {
-      "type": "virtualbox",
       "boot_command": [
         "<esc><esc><enter><wait>",
         "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu64-saucy-preseed.cfg <wait>",
@@ -34,18 +12,18 @@
       ],
       "boot_wait": "4s",
       "disk_size": 65536,
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "guest_os_type": "Ubuntu_64",
       "http_directory": "http",
       "iso_checksum": "4d1a8b720cdd14b76ed9410c63a00d0e",
       "iso_checksum_type": "md5",
       "iso_url": "http://releases.ubuntu.com/13.10/ubuntu-13.10-server-amd64.iso",
-      "ssh_username": "vagrant",
+      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
       "ssh_password": "vagrant",
       "ssh_port": 22,
+      "ssh_username": "vagrant",
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
-      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
-      "virtualbox_version_file": ".vbox_version",
+      "type": "virtualbox-iso",
       "vboxmanage": [
         [
           "modifyvm",
@@ -59,10 +37,10 @@
           "--cpus",
           "2"
         ]
-      ]
+      ],
+      "virtualbox_version_file": ".vbox_version"
     },
     {
-      "type": "vmware",
       "boot_command": [
         "<esc><esc><enter><wait>",
         "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu64-saucy-preseed.cfg <wait>",
@@ -79,16 +57,40 @@
       "iso_checksum": "4d1a8b720cdd14b76ed9410c63a00d0e",
       "iso_checksum_type": "md5",
       "iso_url": "http://releases.ubuntu.com/13.10/ubuntu-13.10-server-amd64.iso",
-      "ssh_username": "vagrant",
+      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
       "ssh_password": "vagrant",
       "ssh_port": 22,
+      "ssh_username": "vagrant",
       "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
+      "type": "vmware-iso",
       "vmx_data": {
+        "cpuid.coresPerSocket": "1",
         "memsize": "512",
-        "numvcpus": "2",
-        "cpuid.coresPerSocket": "1"
+        "numvcpus": "2"
       }
+    }
+  ],
+  "post-processors": null,
+  "provisioners": [
+    {
+      "override": {
+        "virtualbox-iso": {
+          "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
+        },
+        "vmware-iso": {
+          "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
+        }
+      },
+      "scripts": [
+        "scripts/ubuntu64-saucy-build_time.sh",
+        "scripts/ubuntu64-saucy-apt.sh",
+        "scripts/ubuntu64-saucy-sudo.sh",
+        "scripts/ubuntu64-saucy-vagrant.sh",
+        "scripts/ubuntu64-saucy-vbox.sh",
+        "scripts/ubuntu64-saucy-cleanup.sh"
+      ],
+      "type": "shell"
     }
   ]
 }
+
