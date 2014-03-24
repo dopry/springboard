@@ -3,12 +3,12 @@
     {
       "type": "shell",
       "scripts": [
-        "scripts/build_time.sh",
-        "scripts/apt.sh",
-        "scripts/sudo.sh",
-        "scripts/vagrant.sh",
-        "scripts/vbox.sh",
-        "scripts/cleanup.sh"
+        "scripts/ubuntu64-saucy-build_time.sh",
+        "scripts/ubuntu64-saucy-apt.sh",
+        "scripts/ubuntu64-saucy-sudo.sh",
+        "scripts/ubuntu64-saucy-vagrant.sh",
+        "scripts/ubuntu64-saucy-vbox.sh",
+        "scripts/ubuntu64-saucy-cleanup.sh"
       ],
       "override": {
         "virtualbox": {
@@ -25,7 +25,7 @@
       "type": "virtualbox",
       "boot_command": [
         "<esc><esc><enter><wait>",
-        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu64-saucy-preseed.cfg <wait>",
         "debian-installer=en_US auto locale=en_US kbd-chooser/method=us <wait>",
         "hostname={{ .Name }} <wait>",
         "fb=false debconf/frontend=noninteractive <wait>",
@@ -65,7 +65,7 @@
       "type": "vmware",
       "boot_command": [
         "<esc><esc><enter><wait>",
-        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu64-saucy-preseed.cfg <wait>",
         "debian-installer=en_US auto locale=en_US kbd-chooser/method=us <wait>",
         "hostname={{ .Name }} <wait>",
         "fb=false debconf/frontend=noninteractive <wait>",
