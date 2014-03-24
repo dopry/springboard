@@ -4,7 +4,7 @@
       "boot_command": [
         "<esc><wait>",
         "install <wait>",
-        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/debian64-wheezy-preseed.cfg <wait>",
         "debian-installer=en_US <wait>",
         "auto <wait>",
         "locale=en_US <wait>",
@@ -52,7 +52,7 @@
       "boot_command": [
         "<esc><wait>",
         "install <wait>",
-        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/debian64-wheezy-preseed.cfg <wait>",
         "debian-installer=en_US <wait>",
         "auto <wait>",
         "locale=en_US <wait>",
@@ -72,7 +72,7 @@
       "http_directory": "http",
       "iso_checksum": "72473e8a5e65b61acc7efde90d9f71d1",
       "iso_checksum_type": "md5",
-      "iso_url": "http://cdimage.debian.org/debian-cd/7.3.0/amd64/iso-cd/debian-7.3.0-amd64-netinst.iso",
+      "iso_url": "http://cdimage.debian.org/debian-cd/7.4.0/amd64/iso-cd/debian-7.4.0-amd64-netinst.iso",
       "shutdown_command": "echo 'halt -p' > shutdown.sh; echo 'vagrant'|sudo -S bash 'shutdown.sh'",
       "ssh_password": "vagrant",
       "ssh_port": 22,
@@ -98,13 +98,13 @@
         }
       },
       "scripts": [
-        "scripts/base.sh",
-        "scripts/vagrant.sh",
-        "scripts/virtualbox.sh",
-        "scripts/postinstall.sh",
-        "scripts/selenium.sh",
-        "scripts/cleanup.sh",
-        "scripts/zerodisk.sh"
+        "scripts/debian64-wheezy-base.sh",
+        "scripts/debian64-wheezy-vagrant.sh",
+        "scripts/debian64-wheezy-virtualbox.sh",
+        "scripts/debian64-wheezy-postinstall.sh",
+        "scripts/debian64-wheezy-selenium.sh",
+        "scripts/debian64-wheezy-cleanup.sh",
+        "scripts/debian64-wheezy-zerodisk.sh"
       ],
       "type": "shell"
     }
