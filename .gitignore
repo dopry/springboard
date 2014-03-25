@@ -23,3 +23,4 @@ veewee/iso/
 Gemfile.lock
 packer/packer_cache/*
 packer/output-*
+.vagrant/
