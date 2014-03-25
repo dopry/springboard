@@ -88,7 +88,13 @@
       }
     }
   ],
-  "post-processors": null,
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "springboard-{{.BuildName}}.box",
+      "compression_level": 1
+    }
+  ],
   "provisioners": [
     {
       "override": {
