@@ -1,6 +1,7 @@
 {
   "builders": [
     {
+      "name": "ubuntu64-saucy-virtualbox",
       "boot_command": [
         "<esc><esc><enter><wait>",
         "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu64-saucy-preseed.cfg <wait>",
@@ -41,6 +42,7 @@
       "virtualbox_version_file": ".vbox_version"
     },
     {
+      "name": "ubuntu64-saucy-vmware",
       "boot_command": [
         "<esc><esc><enter><wait>",
         "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu64-saucy-preseed.cfg <wait>",
@@ -74,20 +76,21 @@
   "provisioners": [
     {
       "override": {
-        "virtualbox-iso": {
+        "ubuntu64-saucy-virtualbox": {
           "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
         },
-        "vmware-iso": {
+        "ubuntu64-saucy-vmware": {
           "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
         }
       },
       "scripts": [
-        "scripts/ubuntu64-saucy-build_time.sh",
-        "scripts/ubuntu64-saucy-apt.sh",
-        "scripts/ubuntu64-saucy-sudo.sh",
+        "scripts/ubuntu64-saucy-base.sh",
         "scripts/ubuntu64-saucy-vagrant.sh",
-        "scripts/ubuntu64-saucy-vbox.sh",
-        "scripts/ubuntu64-saucy-cleanup.sh"
+        "scripts/ubuntu64-saucy-virtualbox.sh",
+        "scripts/ubuntu64-saucy-postinstall.sh",
+        "scripts/ubuntu64-saucy-selenium.sh",
+        "scripts/ubuntu64-saucy-cleanup.sh",
+        "scripts/ubuntu64-saucy-zerodisk.sh"
       ],
       "type": "shell"
     }
