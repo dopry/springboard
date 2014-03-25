@@ -1,7 +1,4 @@
 # postinstall.sh
-# springboard aims to provide a comprehensive ready to roll 
-# unconfigured development platform.
-
 
 # install php code sniffer
   pear install PHP_CodeSniffer-1.5.1
@@ -19,11 +16,15 @@
     tar -xf /tmp/phantomjs-1.9.7-linux-x86_64.tar -C /opt/
     rm /tmp/phantomjs-1.9.7-linux-x86_64.tar
   fi
+
 #ansible
- wget http://releases.ansible.com/ansible/ansible-1.4.5.tar.gz -O /opt/ansible-1.4.5.tar.gz
- tar -C /opt -xzf /opt/ansible-1.4.5.tar.gz
- if [ -L /opt/ansible ]; then 
-   rm /opt/ansible
- fi
- ln -s /opt/ansible-1.4.5 /opt/ansible
- echo PATH="$PATH:/opt/ansible/bin" >> /etc/profile.d/ansible.sh
+  wget http://releases.ansible.com/ansible/ansible-1.4.5.tar.gz -O /opt/ansible-1.4.5.tar.gz
+  tar -C /opt -xzf /opt/ansible-1.4.5.tar.gz
+  if [ -L /opt/ansible ]; then 
+    rm /opt/ansible
+  fi
+  ln -s /opt/ansible-1.4.5 /opt/ansible
+  cd /opt/ansible/
+  make
+  make install
+ 
