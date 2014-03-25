@@ -10,3 +10,18 @@ This repository contains:
 * /Vagrantfile - Example vagrant file for all boxes
 
 You can use packer to build the VM's yourself or you can use the images hosted on [Vagrant Cloud](http://vagrantcloud.com).
+
+## Installed Packages
+
+* PHP, distribution version
+  * Pear, distribution version
+  * PHP Codesniffer, 1.5.1
+* NodeJS, distribution version
+  * NPM, distribution version
+  * JSLint, https://raw2.github.com/douglascrockford/JSLint/master/jslint.js
+* Python, distribution version
+* Java, distribution version
+* Selenium Server, 
+* PhantomJS, 1.9.7
+* Ansible, 1.4.5
+
