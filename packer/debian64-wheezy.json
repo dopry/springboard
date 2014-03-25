@@ -1,6 +1,7 @@
 {
   "builders": [
     {
+      "name": "debian64-wheezy-virtualbox",
       "boot_command": [
         "<esc><wait>",
         "install <wait>",
@@ -49,6 +50,7 @@
       "virtualbox_version_file": ".vbox_version"
     },
     {
+      "name": "debian64-wheezy-vmware",
       "boot_command": [
         "<esc><wait>",
         "install <wait>",
@@ -90,10 +92,10 @@
   "provisioners": [
     {
       "override": {
-        "virtualbox-iso": {
+        "debian64-wheezy-virtualbox": {
           "execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
         },
-        "vmware-iso": {
+        "debian64-wheezy-vmware": {
           "execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
         }
       },
