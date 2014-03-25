@@ -13,15 +13,29 @@ You can use packer to build the VM's yourself or you can use the images hosted o
 
 ## Installed Packages
 
-* PHP, distribution version
+* PHP 5.4, distribution version
   * Pear, distribution version
   * PHP Codesniffer, 1.5.1
+  * PHP5 GD2, distribution version
+  * PHP5 imap, distribution version
+  * PHP5 mysql, distribution version
+  * PHP5 xdebug, distribution version
+  * PHP5 xsl, distribution version
+  * PHPUnit, distribution version
+  * PHPUnit Selenium, distribution version
 * NodeJS, distribution version
   * NPM, distribution version
   * JSLint, https://raw2.github.com/douglascrockford/JSLint/master/jslint.js
 * Python, distribution version
-* Java, distribution version
-* Selenium Server, 
-* PhantomJS, 1.9.7
+  * Python Jinja2, distribution version
+  * Python YAML, distribution version
+* Selenium Server, 2.35.0
+  * PhantomJS, 1.9.7
+  * iceweasel, distribution version
 * Ansible, 1.4.5
+* Mysql Server, distribution version
+* Git, distribution version
+* Postfix, distribution version
+* Apache2, distribution version 
+  * Mod PHP, distribution version
 
