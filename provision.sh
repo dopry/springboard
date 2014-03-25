@@ -16,4 +16,4 @@ sudo -i -u vagrant cp -rp /vagrant/ansible /home/vagrant/
 sudo -i -u vagrant chmod 644 /home/vagrant/ansible/inventory/vagrant
 
 # run bootstrap playbook.
-sudo -i -u vagrant ansible-playbook  -i /home/vagrant/ansible/inventory/vagrant /home/vagrant/ansible/bootstrap.yml
+sudo -i -u vagrant ansible-playbook  -i /home/vagrant/ansible/inventory/vagrant /home/vagrant/ansible/provision.yml
