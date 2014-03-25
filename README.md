@@ -39,3 +39,11 @@ You can use packer to build the VM's yourself or you can use the images hosted o
 * Apache2, distribution version 
   * Mod PHP, distribution version
 
+## Contributing
+
+Springboard needs you! We want your feedback and pull requests. Springboard is driven by a few core concepts.
+
+* Use distribution packages for features where possible.
+* Remove unnecessary packages where it doesn't hamper the development experience.
+* Add features that reduce the work and time necessary for development.
+* Vagrants should be re-usable both for CI and production.
