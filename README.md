@@ -31,8 +31,8 @@ You can use packer to build the VM's yourself or you can use the images hosted o
   * Python YAML, distribution version
 * Selenium Server, 2.35.0
   * PhantomJS, 1.9.7
-  * iceweasel, distribution version
-* Ansible, 1.4.5
+  * Firefox(iceweasel), distribution version
+* Ansible, 1.5
 * Mysql Server, distribution version
 * Git, distribution version
 * Postfix, distribution version
