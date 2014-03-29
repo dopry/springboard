@@ -44,7 +44,7 @@
           "modifyvm",
           "{{.Name}}",
           "--cpus",
-          "1"
+          "2"
         ]
       ],
       "virtualbox_version_file": ".vbox_version"
@@ -84,7 +84,7 @@
       "vmx_data": {
         "cpuid.coresPerSocket": "1",
         "memsize": "512",
-        "numvcpus": "1"
+        "numvcpus": "2"
       }
     }
   ],
