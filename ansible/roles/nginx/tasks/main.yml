@@ -1,0 +1,25 @@
+---
+- name: install nginx
+  apt: pkg=nginx state=present
+
+- name: remove apache
+  apt: pkg=apache state=absent
+
+- name: configure nginx site
+  template: src=site.conf dest=/etc/nginx/sites-available/{{nginx_fqdn}}
+
+- name: ensure html root 
+  file: path={{nginx_root}} state=directory mode=755 owner={{nginx_owner}} group={{nginx_group}}
+
+- name: ensure log dir
+  file: path={{nginx_logdir}} state=directory
+
+- name: enable nginx site
+  file: src=/etc/nginx/sites-available/{{nginx_fqdn}}
+        dest=/etc/nginx/sites-enabled/{{nginx_fqdn}}
+        state=link
+  notify:
+    - reload nginx
+
+- name: configure nginx site
+  service: name=nginx state=started

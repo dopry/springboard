@@ -1,0 +1,5 @@
+---
+nginx_fqdn: test.example
+nginx_port: 80
+nginx_root: /var/www/{{nginx_fqdn}}/html
+nginx_logdir: /var/www/{{nginx_fqdn}}/logs

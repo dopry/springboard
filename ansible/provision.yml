@@ -1,4 +1,10 @@
 ---
-- hosts: all 
-  user: vagrant
+- hosts: web 
+  user: darrel.opry
   sudo: yes
+  pre_tasks:
+    - user: name=springboard 
+    - authorized_key: user=springboard key="ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAjoJVEALZ+k37aY7pill6uetPUm/Ga9ZMomNG1GmIxlOC2xutg2xyS8UB1s0+4DM5SY0TgWDssFskUqt9lV/JORgv7MiOJ+czKq7hr123w50EDvLt5Nlsoem288WUVBRKCMiUtvREEFtCJU+0Jn0/Z/QE7e2o5nI3GsDNUKC46HXU5b+O9GqrZyFY+ujdEZuQpGZpCjSwluo/dHb8qXCDle6n+n2HeGrEXvt3XbPfHD2i2zGIcxvTu6iwrCihtgMDCzQCMSQLK///lEhAOtM719v5IpXRA5x49LolVFxpDQSK+IuW7NbGjl343Ewk0UEJazS+Sj5islW7euQInhQiUw== springboard-deployment" state=present
+  roles:
+    - { role: nginx, nginx_fqdn: boxes.springboard.spry-group.com, nginx_owner: springboard, nginx_group: springboard }
+
