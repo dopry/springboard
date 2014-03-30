@@ -1,4 +1,8 @@
 {
+  "variables": {
+    "comment": "pull the BUILD_NUMBER environment variable set by Jenkins",
+    "build_version": "0.0.{{env `BUILD_NUMBER` }}"
+  },
   "builders": [
     {
       "name": "ubuntu64-saucy-virtualbox",
@@ -72,7 +76,13 @@
       }
     }
   ],
-  "post-processors": null,
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "springboard-saucy-{{.BuildName}}-{{user `build_version`}}.box",
+      "compression_level": 1
+    }
+  ],
   "provisioners": [
     {
       "override": {

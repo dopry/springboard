@@ -3,5 +3,5 @@
   user: springboard
   tasks:
     # copy from build on host. we can't use relative path from here because 
-    - copy: src=/vagrant/packer/springboard-debian64-wheezy-virtualbox.box dest=/var/www/boxes.springboard.spry-group.com/html/springboard-wheezy64-{{build_version}}.vbox
+    - copy: src=/vagrant/packer/springboard-wheezy-virtualbox-{{build_version}}.box dest=/var/www/boxes.springboard.spry-group.com/html/springboard-wheezy-{{build_version}}.vbox
 

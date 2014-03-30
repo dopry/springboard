@@ -47,3 +47,14 @@ Springboard needs you! We want your feedback and pull requests. Springboard is d
 * Remove unnecessary packages where it doesn't hamper the development experience.
 * Add features that reduce the work and time necessary for development.
 * Vagrants should be re-usable both for CI and production.
+
+## Build Process
+
+ssh agent forwarding should be enabled and your key must deployed in order to push updates.
+
+    set $env:BUILD_NUMBER="N"
+    cd packer
+    packer build debian_wheezy64.json
+    vagrant up
+    vagrant ssh -c " ansible-playbook --extra-vars "build_version=0.0.$env::BUILD_NUMBER"  -i inventory/vagrant deploy.yml"
+ 
