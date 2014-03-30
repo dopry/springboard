@@ -1,7 +1,11 @@
 {
+  "variables": {
+    "comment": "pull the BUILD_NUMBER environment variable set by Jenkins",
+    "build_version": "0.0.{{env `BUILD_NUMBER` }}"
+  },
   "builders": [
     {
-      "name": "debian64-wheezy-virtualbox",
+      "name": "virtualbox",
       "boot_command": [
         "<esc><wait>",
         "install <wait>",
@@ -50,7 +54,7 @@
       "virtualbox_version_file": ".vbox_version"
     },
     {
-      "name": "debian64-wheezy-vmware",
+      "name": "vmware",
       "boot_command": [
         "<esc><wait>",
         "install <wait>",
@@ -91,17 +95,17 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "springboard-{{.BuildName}}.box",
+      "output": "springboard-wheezy-{{.BuildName}}-{{user `build_version`}}.box",
       "compression_level": 1
     }
   ],
   "provisioners": [
     {
       "override": {
-        "debian64-wheezy-virtualbox": {
+        "virtualbox": {
           "execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
         },
-        "debian64-wheezy-vmware": {
+        "vmware": {
           "execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
         }
       },
