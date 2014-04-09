@@ -52,7 +52,7 @@ Springboard needs you! We want your feedback and pull requests. Springboard is d
 
 ssh agent forwarding should be enabled and your key must deployed in order to push updates.
 
-    set $env:BUILD_NUMBER="N"
+    $env:BUILD_NUMBER="N"
     cd packer
     packer build debian_wheezy64.json
     vagrant up
