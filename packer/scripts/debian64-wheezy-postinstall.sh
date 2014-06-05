@@ -18,13 +18,13 @@
   fi
 
 #ansible
-  wget http://releases.ansible.com/ansible/ansible-1.5.tar.gz -O /opt/ansible-1.5.tar.gz
-  tar -C /opt -xzf /opt/ansible-1.5.tar.gz
+  wget http://releases.ansible.com/ansible/ansible-1.6.2.tar.gz -O /opt/ansible-1.6.2.tar.gz
+  tar -C /opt -xzf /opt/ansible-1.6.2.tar.gz
   if [ -L /opt/ansible ]; then 
     rm /opt/ansible
   fi
-  ln -s /opt/ansible-1.5 /opt/ansible
-  cd /opt/ansible/
+  ln -s /opt/ansible-1.6.2 /opt/ansible
+  cd /opt/ansible
   make
   make install
  
