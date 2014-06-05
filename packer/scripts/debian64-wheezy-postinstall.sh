@@ -18,13 +18,9 @@
   fi
 
 #ansible
-  wget http://releases.ansible.com/ansible/ansible-1.6.2.tar.gz -O /opt/ansible-1.6.2.tar.gz
-  tar -C /opt -xzf /opt/ansible-1.6.2.tar.gz
-  if [ -L /opt/ansible ]; then 
-    rm /opt/ansible
-  fi
-  ln -s /opt/ansible-1.6.2 /opt/ansible
-  cd /opt/ansible
+  wget http://releases.ansible.com/ansible/ansible-1.6.2.tar.gz -O /usr/local/src/ansible-1.6.2.tar.gz
+  tar  -xzf /usr/local/src/ansible-1.6.2.tar.gz -C /usr/local/src/
+  cd /usr/local/src/ansible-1.6.2
   make
   make install
  
