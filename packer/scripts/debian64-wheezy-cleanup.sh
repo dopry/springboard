@@ -33,7 +33,7 @@ rm $VBOX_ISO
 
 rm -r /usr/share/doc/*
 rm -r /var/cache/apt 
-#rm -r /var/lib/apt/lists
+
 
 # Removing leftover leases and persistent rules
 echo "cleaning up dhcp leases"
