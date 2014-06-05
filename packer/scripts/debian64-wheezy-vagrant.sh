@@ -2,9 +2,9 @@
 
 date > /etc/vagrant_box_build_time
 
-# Create the user vagrant with password vagrant
-adduser sudo vagrant
-adduser adm vagrant
+# Create the user vagrant with the sudo and adm groups.
+adduser vagrant sudo
+adduser vagrant adm 
 
 # Install vagrant keys
 mkdir -pm 700 /home/vagrant/.ssh
@@ -32,6 +32,7 @@ chmod 0600 /root/.ssh/id_rsa
 chmod 0644 /root/.ssh/id_rsa.pub
 chmod 0644 /root/.ssh/known_hosts
 chown -R root:root /root/.ssh
+
 
 # Customize the message of the day
 echo 'Springboard! Jump in!' > /var/run/motd
