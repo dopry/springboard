@@ -32,7 +32,7 @@ VBOX_ISO=VBoxGuestAdditions_$VBOX_VERSION.iso
 rm $VBOX_ISO
 
 rm -r /usr/share/doc/*
-rm -r /var/cache/apt 
+rm -r /var/cache/apt/*
 
 
 # Removing leftover leases and persistent rules
