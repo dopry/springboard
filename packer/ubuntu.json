@@ -2,22 +2,21 @@
   "variables": {
     "comment": "pull the BUILD_NUMBER environment variable set by Jenkins",
     "build_version": "0.0.{{env `BUILD_NUMBER` }}",
-    "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04-desktop-amd64.iso",
-    "iso_checksum": "ubuntu-14.04-server-amd64.iso",
+    "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04-server-amd64.iso",
+    "iso_checksum": "01545fa976c8367b4f0d59169ac4866c",
     "iso_checksum_type": "md5",
     "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
     "ssh_password": "vagrant",
     "ssh_port": 22,
     "ssh_username": "vagrant",
-    "ssh_wait_timeout": "10000s",
-
+    "ssh_wait_timeout": "10000s"
   },
   "builders": [
     {
       "name": "virtualbox",
       "boot_command": [
         "<esc><esc><enter><wait>",
-        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu64-saucy-preseed.cfg <wait>",
+        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu-preseed.cfg <wait>",
         "debian-installer=en_US auto locale=en_US kbd-chooser/method=us <wait>",
         "hostname={{ .Name }} <wait>",
         "fb=false debconf/frontend=noninteractive <wait>",
@@ -58,7 +57,7 @@
       "name": "vmware",
       "boot_command": [
         "<esc><esc><enter><wait>",
-        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu64-saucy-preseed.cfg <wait>",
+        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu-preseed.cfg <wait>",
         "debian-installer=en_US auto locale=en_US kbd-chooser/method=us <wait>",
         "hostname={{ .Name }} <wait>",
         "fb=false debconf/frontend=noninteractive <wait>",
@@ -88,31 +87,50 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "springboard-saucy-{{.BuildName}}-{{user `build_version`}}.box",
+      "output": "springboard-debian-{{.BuildName}}-{{user `build_version`}}.box",
       "compression_level": 1
     }
   ],
   "provisioners": [
     {
-      "override": {
-        "ubuntu64-saucy-virtualbox": {
-          "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
-        },
-        "ubuntu64-saucy-vmware": {
-          "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
-        }
-      },
+      "//": "setup basic box and vagrant specific features",
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
       "scripts": [
-        "scripts/ubuntu-base.sh",
-        "scripts/ubuntu-vagrant.sh",
-        "scripts/ubuntu-virtualbox.sh",
-        "scripts/ubuntu-postinstall.sh",
-        "scripts/ubuntu-selenium.sh",
-        "scripts/ubuntu-cleanup.sh",
-        "scripts/ubuntu-zerodisk.sh"
+        "scripts/1.base.sh",
+        "scripts/2.vagrant.sh",
+        "scripts/3.ansible.sh"
       ],
-      "type": "shell"
-    }
+    },
+    {
+      "//": "Install virtualbox guest additions",
+      "type": "shell",
+      "only": ["virtulabox"],
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "scripts": [
+        "scripts/4.virtualbox.sh",
+      ],
+    },
+    {
+      "//": "Install vmware guest additions",
+      "type": "shell",
+      "only": ["vmware"],
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "scripts": [
+        "scripts/4.vmware.sh",
+      ],
+    },
+    {
+      "//": "post installation and packaging tests TODO replace with ansible-local",
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "scripts": [
+        "scripts/5.postinstall.sh",
+        "scripts/6.selenium.sh",
+        "scripts/7.cleanup.sh",
+        "scripts/8.zerodisk.sh"
+      ],
+    },
   ]
 }
 

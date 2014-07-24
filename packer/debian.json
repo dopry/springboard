@@ -49,6 +49,12 @@
           "{{.Name}}",
           "--cpus",
           "2"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--noapic",
+          "on"
         ]
       ],
       "virtualbox_version_file": ".vbox_version"
@@ -93,35 +99,50 @@
       }
     }
   ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "scripts": [
+        "scripts/1.base.sh",
+        "scripts/2.vagrant.sh",
+        "scripts/3.ansible.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["virtualbox"],
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "scripts": [
+        "scripts/4.virtualbox.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "only": ["vmware"],
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "scripts": [
+        "scripts/4.vmware.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "scripts": [
+        "scripts/5.postinstall.sh",
+        "scripts/6.selenium.sh",
+        "scripts/7.cleanup.sh",
+        "scripts/8.zerodisk.sh"
+      ]
+    }
+  ],
+
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "springboard-wheezy-{{.BuildName}}-{{user `build_version`}}.box",
+      "output": "springboard-debian-{{.BuildName}}-{{user `build_version`}}.box",
       "compression_level": 1
-    }
-  ],
-  "provisioners": [
-    {
-      "override": {
-        "virtualbox": {
-          "execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
-        },
-        "vmware": {
-          "execute_command": "echo 'vagrant'|sudo -S bash '{{.Path}}'"
-        }
-      },
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
-      "scripts": [
-        "scripts/debian64-wheezy-base.sh",
-        "scripts/debian64-wheezy-vagrant.sh",
-        "scripts/debian64-wheezy-virtualbox.sh",
-        "scripts/debian64-wheezy-vmware.sh",
-        "scripts/debian64-wheezy-postinstall.sh",
-        "scripts/debian64-wheezy-selenium.sh",
-        "scripts/debian64-wheezy-cleanup.sh",
-        "scripts/debian64-wheezy-zerodisk.sh"
-      ],
-      "type": "shell"
     }
   ]
 }

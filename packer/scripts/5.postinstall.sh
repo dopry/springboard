@@ -1,5 +1,3 @@
-# postinstall.sh
-
 # install php code sniffer
   pear install PHP_CodeSniffer-1.5.1
 
@@ -17,14 +15,5 @@
     rm /tmp/phantomjs-1.9.7-linux-x86_64.tar
   fi
 
-#ansible
-  wget http://releases.ansible.com/ansible/ansible-1.4.5.tar.gz -O /opt/ansible-1.4.5.tar.gz
-  tar -C /opt -xzf /opt/ansible-1.4.5.tar.gz
-  if [ -L /opt/ansible ]; then 
-    rm /opt/ansible
-  fi
-  ln -s /opt/ansible-1.4.5 /opt/ansible
-  cd /opt/ansible/
-  make
-  make install
+
  
