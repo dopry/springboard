@@ -16,4 +16,9 @@
   fi
 
 
+  wget http://releases.ansible.com/ansible/ansible-1.6.2.tar.gz -O /usr/local/src/ansible-1.6.2.tar.gz
+  tar  -xzf /usr/local/src/ansible-1.6.2.tar.gz -C /usr/local/src/
+  cd /usr/local/src/ansible-1.6.2
+  make
+  make install
  
